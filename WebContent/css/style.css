@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+body {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+#header > div.container > nav.navbar-collapse {
+	height: 0.8px;
+}
+
+#footer, .item-info {
+	color: #777777;
+}
+#footer p {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.panel-heading > h3 > a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.panel-heading > h3 > a:hover {
+	color: #333333;
+}
+.panel-body > .description {
+	height: 60px;
+}
+.info {
+	color: #777777;
+}
+
+.label-fix {
+	padding-top: 0px;
+}
