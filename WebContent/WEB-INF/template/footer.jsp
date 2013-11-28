@@ -3,7 +3,7 @@
 
 <footer id="footer">
 	<div class="container">
-		<p class="text-muted credit">This website is an application demo to learn JSP/Servlet technologies - <a href="//docs.oracle.com/javaee/6/api/">JavaEE</a></p>
+		<p class="text-muted credit">This website is an application demo to learn JPA/JSP/Servlet technologies - <a href="//docs.oracle.com/javaee/6/api/">JavaEE</a></p>
 	</div>
 </footer>
 
