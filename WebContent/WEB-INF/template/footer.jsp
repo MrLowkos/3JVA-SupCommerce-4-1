@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+<footer id="footer">
 	<div class="container">
-		<p>This website is an application demo to learn Servlet/JSP/JPA technologies - <a href="//docs.oracle.com/javaee/6/api/">Doc Java</a></p>
+		<p class="text-muted credit">This website is an application demo to learn JSP/Servlet technologies - <a href="//docs.oracle.com/javaee/6/api/">JavaEE</a></p>
 	</div>
 </footer>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"/></script>

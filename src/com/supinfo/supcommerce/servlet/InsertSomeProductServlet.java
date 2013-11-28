@@ -1,4 +1,4 @@
-package com.supinfo.supcommerce.controler.servlet;
+package com.supinfo.supcommerce.servlet;
 
 import java.io.IOException;
 import java.util.Random;
@@ -13,29 +13,30 @@ import com.supinfo.sun.supcommerce.bo.SupProduct;
 import com.supinfo.sun.supcommerce.doa.SupProductDao;
 
 /**
- * Servlet implementation class InsertSomeProductServlet
- * 
- * Register a random generated product in memory (via SupCommerce.jar)
+ * <b>InsertSomeProductServlet</b>
+ * <p>
+ * Register random generated product in memory (through SupCommerce.jar)
+ * </p>
  * 
  * @author Elka
- * @version 4.1
+ * @version 1.1
  * @since SupCommerce 2.1
  */
-@WebServlet(description = "Servlet To Insert Random Product", urlPatterns = "/auth/basicInsert")
+@WebServlet(displayName = "InsertSomeProduct", description = "Servlet to insert random product", urlPatterns = "/auth/basicInsert")
 public class InsertSomeProductServlet extends HttpServlet {
-	private static final long	serialVersionUID		= 1L;
-
-	private static final String	LIST_PRODUCT_SERVLET	= "/listProduct";
-
+	private static final long	serialVersionUID	= 1L;
+	
+	private static final String	LIST_PRODUCT_VIEW	= "/listProduct";
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public InsertSomeProductServlet() {
 		super();
 	}
-
+	
 	/**
-	 * Handles all HTTP methods (GET, POST, PUT, DELETE, ...).
+	 * Handle all HTTP methods (GET, POST, PUT, DELETE, ...).
 	 * 
 	 * @param request
 	 *            servlet request
@@ -45,30 +46,27 @@ public class InsertSomeProductServlet extends HttpServlet {
 	 *             if a servlet-specific error occurs
 	 * @throws IOException
 	 *             if an I/O error occurs
-	 * 
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void service(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		// Random generator + protect the reference (optional)
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		
+		// Random generator (optional) + protect the reference of generator with final keyword
 		final Random rand = new Random();
-
-		// New empty product
+		
+		// New product's creation
 		final SupProduct product = new SupProduct();
 		// Set product properties randomly
 		product.setName("Product-" + rand.nextInt(100));
-		product.setContent("Product's Information of " + product.getName());
-		product.setPrice(rand.nextFloat() + rand.nextInt(1000));
-
+		product.setContent("Product information of " + product.getName() + " have to be set.");
+		product.setPrice(rand.nextFloat() + rand.nextInt(100));
+		
 		// Generate ID and add product in memory
 		SupProductDao.addProduct(product);
-
-		// Redirect to list product
-		response.sendRedirect(request.getServletContext().getContextPath()
-				+ LIST_PRODUCT_SERVLET);
+		
+		// Redirect to listProduct.jsp
+		response.sendRedirect(request.getServletContext().getContextPath() + LIST_PRODUCT_VIEW);
+		
 	}
-
 }

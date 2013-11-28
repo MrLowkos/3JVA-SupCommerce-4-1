@@ -1,4 +1,4 @@
-package com.supinfo.supcommerce.controler.servlet;
+package com.supinfo.supcommerce.servlet;
 
 import java.io.IOException;
 
@@ -9,29 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LogoutServlet
- * 
+ * <b>LogoutServlet</b>
+ * <p>
  * Invalidate session
+ * </p>
  * 
  * @author Elka
- * @version 4.1
+ * @version 1.0
  * @since SupCommerce 3.1
  */
-@WebServlet(description = "Servlet To Control Logout", urlPatterns = { "/logout" })
+@WebServlet(displayName = "Logout", description = "Servlet to control logout", urlPatterns = { "/logout" })
 public class LogoutServlet extends HttpServlet {
 	private static final long	serialVersionUID		= 1L;
-
-	private static final String	PARAM_USERNAME_SESSION	= "username";
+	
+	private static final String	USERNAME_SESSION_PARAM	= "username";
 	private static final String	LOGIN_SERVLET			= "/login";
 	private static final String	ROOT_VIEW				= "/";
-
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public LogoutServlet() {
 		super();
 	}
-
+	
 	/**
 	 * Handles <code>GET</code> HTTP method
 	 * 
@@ -43,35 +44,25 @@ public class LogoutServlet extends HttpServlet {
 	 *             if a servlet-specific error occurs
 	 * @throws IOException
 	 *             if an I/O error occurs
-	 * 
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// Retrieve username session parameter
-		final Object sessionUsername = request.getSession().getAttribute(
-				PARAM_USERNAME_SESSION);
-
-		// Username exist in session, user is proprely logged :s password ...
-		// MD5 ... session token ???
+		final Object sessionUsername = request.getSession().getAttribute(USERNAME_SESSION_PARAM);
+		
+		// Username exist in session
 		if (sessionUsername != null && sessionUsername instanceof String) {
 			// Destroy session
 			request.getSession().invalidate();
-			// or just remove "username" attribute
-			// request.getSession().removeAttribute("username");
-
 			// Redirect to welcome page
-			response.sendRedirect(request.getServletContext().getContextPath()
-					+ ROOT_VIEW);
+			response.sendRedirect(request.getServletContext().getContextPath() + ROOT_VIEW);
 		} else
 			// Redirect to login page
-			response.sendRedirect(request.getServletContext().getContextPath()
-					+ LOGIN_SERVLET);
+			response.sendRedirect(request.getServletContext().getContextPath() + LOGIN_SERVLET);
 	}
-
+	
 	/**
 	 * Handles <code>POST</code> HTTP method
 	 * 
@@ -83,14 +74,12 @@ public class LogoutServlet extends HttpServlet {
 	 *             if a servlet-specific error occurs
 	 * @throws IOException
 	 *             if an I/O error occurs
-	 * 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		doGet(request, response);
 	}
-
+	
 }

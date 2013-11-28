@@ -1,11 +1,10 @@
-<%@page import="org.apache.catalina.util.RequestUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="${pageContext.request.locale.language}">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -14,34 +13,33 @@
 	<!-- CSS bootstrap 3.0 --> 
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="<c:url value="/css/sticky-footer.css"/>">
 	<link rel="stylesheet" href="<c:url value="/css/style.css"/>">					
 </head>
 					
 <body>
-				
-<jsp:include page="/WEB-INF/template/header.jsp"/>
 
-<section id="main-container" class="container">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<form class="form-horizontal" action="login" method="post">
-				<div class="form-group">
-					<label for="username" class="col-xs-2 control-label">Username</label>
-					<div class="col-xs-4 ">
-						<input type="text" name="username" id="username" class="form-control" placeholder="Enter a username"/>
-					</div>
-				</div>
-				<div class="form-group">
-				    <div class="col-xs-offset-2 col-xs-10">
-						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span>&nbsp; LogIn</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</section>
+<div id="wrap"> 
+
+	<%@include file="/WEB-INF/template/header.jsp" %>
+	
+	<section id="main-container" class="container">
+		<form class="form-signin" action="login" method="post">
+			<div class="panel panel-default">
+				<div class="panel-body">			
+			<h2 class="form-signin-heading">Please login</h2>
+			<input class="form-control" type="text" name="username" id="username" autofocus="autofocus" required="required" placeholder="Username">		
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span>&nbsp; LogIn</button>
+			</div>
+			</div>
+		</form>		
+	</section>
+	
+	<div id="push"></div>
+	
+</div>
 						
-<jsp:include page="/WEB-INF/template/footer.jsp"/>
+<%@include file="/WEB-INF/template/footer.jsp" %>
 
 </body>					
 </html>

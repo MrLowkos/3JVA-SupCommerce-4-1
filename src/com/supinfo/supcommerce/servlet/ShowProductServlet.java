@@ -1,4 +1,4 @@
-package com.supinfo.supcommerce.controler.servlet;
+package com.supinfo.supcommerce.servlet;
 
 import java.io.IOException;
 
@@ -13,34 +13,29 @@ import com.supinfo.sun.supcommerce.doa.SupProductDao;
 import com.supinfo.sun.supcommerce.exception.UnknownProductException;
 
 /**
- * Servlet implementation class ShowProductServlet
- * 
- * Show product registered in memory (via SupCommerce.jar) by "id"
- * <code>GET</code> parameter use contextPath/showProduct?id=
+ * <b>ShowProductServlet</b>
+ * <p>
+ * Show product registered in memory (through SupCommerce.jar) by "id" <code>GET</code> parameter use
+ * contextPath/showProduct?id=X where X is a Long
+ * <p>
  * 
  * @author Elka
- * @version 4.1
+ * @version 1.1
  * @since SupCommerce 2.1
  */
-@WebServlet(description = "Servlet To Show A Registered Product By ID", urlPatterns = "/showProduct")
+@WebServlet(name = "ShowProduct", description = "Servlet to show a registered product by id", urlPatterns = "/showProduct")
 public class ShowProductServlet extends HttpServlet {
 	private static final long	serialVersionUID	= 1L;
-
-	private static final String	PARAM_ID_REQ		= "id";
-	private static final String	ATT_ERROR_REQ		= "error";
-	private static final String	ATT_PRODUCT_REQ		= "product";
-
+	
+	private static final String	ID_GET_PARAM		= "id";
+	
+	private static final String	ERROR_REQ_ATT		= "error";
+	private static final String	PRODUCT_REQ_ATT		= "product";
+	
 	private static final String	SHOW_PRODUCT_VIEW	= "/WEB-INF/layout/showProduct.jsp";
-
+	
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ShowProductServlet() {
-		super();
-	}
-
-	/**
-	 * Handles <code>GET</code> HTTP method
+	 * Handle <code>GET</code> HTTP method
 	 * 
 	 * @param request
 	 *            servlet request
@@ -50,26 +45,23 @@ public class ShowProductServlet extends HttpServlet {
 	 *             if a servlet-specific error occurs
 	 * @throws IOException
 	 *             if an I/O error occurs
-	 * 
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// Recover id parameter through url
-		final String idParam = request.getParameter(PARAM_ID_REQ);
-
+		final String id = request.getParameter(ID_GET_PARAM);
+		
 		// New empty product
 		SupProduct product = new SupProduct();
-
+		
 		// Init error message
 		String error = "";
-
-		if (idParam != null && idParam instanceof String) {
+		
+		if (id != null && id instanceof String) {
 			try {
-				final Long idLong = Long.parseLong(idParam);
+				final Long idLong = Long.parseLong(id);
 				product = SupProductDao.findProductById(idLong);
 			} catch (UnknownProductException e) {
 				error = e.getMessage();
@@ -79,11 +71,12 @@ public class ShowProductServlet extends HttpServlet {
 		} else {
 			error = "No \"id\" parameter specified.";
 		}
-
-		request.setAttribute(ATT_ERROR_REQ, error);
-		request.setAttribute(ATT_PRODUCT_REQ, product);
-
-		request.getRequestDispatcher(SHOW_PRODUCT_VIEW).forward(request,
-				response);
+		
+		request.setAttribute(ERROR_REQ_ATT, error);
+		request.setAttribute(PRODUCT_REQ_ATT, product);
+		
+		request.getRequestDispatcher(SHOW_PRODUCT_VIEW).forward(request, response);
+		
 	}
+	
 }
